@@ -12,8 +12,12 @@ source("R/visualization.R")
 
 # Main analysis pipeline
 main <- function() {
-  # Load data
-  saints_seq_only <- load_saints_data(CONFIG$input_file)
+  # Load all datasets
+  datasets <- load_saints_datasets()
+  saints_seq_only <- datasets$saints_seq_only
+  elisa <- datasets$elisa
+  age_elisa <- datasets$age_elisa
+  wilson_data <- datasets$wilson_data
   
   # Preprocess data
   processed_data <- preprocess_salmonella_data(saints_seq_only)
