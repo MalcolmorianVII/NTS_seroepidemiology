@@ -14,13 +14,14 @@ This project aims to explain the genomic findings of exploring NTS Salmonella ep
   bactopia --samples samples.txt -profile docker  --outdir bactopia_analysis
   ```
 
-**2. Downstream Analysis**
-- Combine assembly-scan with SISTR results
-- Visualize the genomic findings in R:
-  - Distribution of serovars among subspecies I & II
-  - Distribution of serogroups among subspecies I & II
-  - Visualize ELISA results with:
-    - Genomic findings
-    - Serovar classification
-    - Serogroup classification
-    - Unique antigenic profile classification
+**2. Downstream analysis pipeline for Salmonella seroepidemiology**
+- Library imports
+  - Loads the required R libraries
+- Data loading
+  - Loads the required data e.g SISTR results in excel format
+- Data preprocessing
+  - Preprocess the data for downstream analysis e.g splitting into subspecies I & II
+- Statistical analyses
+  - Performs statistical analyses on the preprocessed data
+- Visualization generation
+  - Generates visualizations for the preprocessed data e.g histograms of serovars distributed in subspecies I & II
