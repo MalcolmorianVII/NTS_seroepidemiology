@@ -1,0 +1,1 @@
+This project aims to explain the genomic findings of exploring NTS Salmonella epidemiology in Africa and the combination with ELISA results and the visualizations used in that project.This project involves several steps:
