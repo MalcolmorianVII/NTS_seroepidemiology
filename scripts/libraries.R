@@ -1,0 +1,8 @@
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(readxl)
+library(ggpubr)
+library(scales)
+library(vegan)
+library(purrr)
