@@ -8,7 +8,7 @@
 #' @importFrom readxl read_excel
 #' @importFrom cli cli_alert_danger
 #' @importFrom dplyr filter
-load_excel_data <- function(file_path, sheet = NULL, filter_na = TRUE) {
+load_excel_data <- function(file_path,required_columns,filter_cols=NULL) {
   # Validate input file path
   if (!file.exists(file_path)) {
     cli_alert_danger(paste("Error: File not found at", file_path))
@@ -18,16 +18,16 @@ load_excel_data <- function(file_path, sheet = NULL, filter_na = TRUE) {
   # Attempt to read Excel file
   tryCatch({
     # Load data with optional sheet specification
-    data <- read_excel(file_path, sheet = sheet)
+    data <- read_excel(file_path)
     
-    # Optional filtering of NA values
-    if (filter_na) {
+    # Filtering samples with no serogroups
+    if (!is.null(filter_cols) && length(filter_cols) > 0) {
       data <- data %>% 
-        filter(!is.na(serogroup))
+        filter(!is.na(filter_cols))
     }
     
-    # Optional: Add data validation checks
-    validate_data_structure(data)
+    # Optional: Add data validation checks ..required cols is a list
+    validate_data(data, required_columns)
     
     return(data)
   }, error = function(e) {
@@ -40,11 +40,9 @@ load_excel_data <- function(file_path, sheet = NULL, filter_na = TRUE) {
 #'
 #' @param data Data frame to validate
 #' @return Invisible TRUE if valid, throws error if not
-validate_data_structure <- function(data) {
+validate_data <- function(data, required_columns) {
   # Check for required columns
-  required_columns <- c("sample", "serogroup", "serovar", "subspecies")
   missing_columns <- setdiff(required_columns, names(data))
-  
   if (length(missing_columns) > 0) {
     stop(paste("Missing required columns:", paste(missing_columns, collapse = ", ")))
   }
@@ -53,7 +51,6 @@ validate_data_structure <- function(data) {
   if (nrow(data) == 0) {
     warning("Loaded dataset is empty")
   }
-  
   return(invisible(TRUE))
 }
 
@@ -70,24 +67,20 @@ load_saints_datasets <- function() {
   )
   
   # Load datasets with error handling
+  required_seq = c("sample", "h1", "h2", "o_antigen",
+                        "serogroup", "serovar", "serovar_cgmlst")
+  required_elisa = c("sample", "day0STmELISA", "day0SEnELISa", "day90STmELISA",
+                        "day90SEnELISA", "Antibody_fold_change", "Absolute_change") # add age as well
+  required_age_elisa = c("sample", "day0STmELISA", "day0SEnELISa", "day90STmELISA",
+                        "day90SEnELISA", "Antibody_fold_change", "ageyr", "agemon")
+  required_wilson = c("serovar")
+
   datasets <- list(
-    saints_seq_only = load_excel_data(file_paths$main_seq),
-    elisa = load_excel_data(file_paths$elisa),
-    age_elisa = load_excel_data(file_paths$age_elisa),
-    wilson_data = load_excel_data(file_paths$wilson_data)
+    saints_seq_only = load_excel_data(file_paths$main_seq,required_seq,"serogroup"),
+    elisa = load_excel_data(file_paths$elisa,required_elisa),
+    age_elisa = load_excel_data(file_paths$age_elisa,required_age_elisa),
+    wilson_data = load_excel_data(file_paths$wilson_data,required_wilson)
   )
   
   return(datasets)
-}
-
-# Example usage in main script
-main <- function() {
-  # Load all datasets
-  datasets <- load_saints_datasets()
-  
-  # Now you can access datasets like:
-  saints_seq_only <- datasets$saints_seq_only
-  elisa <- datasets$elisa
-  
-  # Rest of your analysis...
 }
