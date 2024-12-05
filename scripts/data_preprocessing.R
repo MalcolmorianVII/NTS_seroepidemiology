@@ -31,11 +31,15 @@ split_by_subspecies <- function(data) {
 #' @param classification Column to check for singletons
 #' @return Dataframe of singleton entries
 get_singletons <- function(data, classification = "serovar") {
-  data %>%
+  singletons <- data %>%
     group_by(!!sym(classification)) %>%
     filter(n() == 1) %>%
     ungroup()
+  
+  singletons$singletype <- classification
+  return(singletons)
 }
+
 
 #' Remove Singletons from Dataset
 #'
@@ -47,6 +51,7 @@ remove_singletons <- function(data, classification = "serovar") {
     group_by(!!sym(classification)) %>%
     filter(n() > 1) %>%
     ungroup()
+  
 }
 
 #' Reorder Categorical Columns by Frequency
@@ -88,8 +93,10 @@ process_salmonella_data <- function(saints_seq_only) {
   singletons <- list(
     subspecies1_O_antigen = get_singletons(subspecies_data$subspecies1, "serovar"),
     subspecies1_cgMLST = get_singletons(subspecies_data$subspecies1, "serovar_cgmlst"),
+    subspecies1_serogroup = get_singletons(subspecies_data$subspecies1, "serogroup"),
     subspecies2_O_antigen = get_singletons(subspecies_data$subspecies2, "serovar"),
-    subspecies2_cgMLST = get_singletons(subspecies_data$subspecies2, "serovar_cgmlst")
+    subspecies2_cgMLST = get_singletons(subspecies_data$subspecies2, "serovar_cgmlst"),
+    subspecies2_serogroup = get_singletons(subspecies_data$subspecies2, "serogroup")
   )
   
   # Remove singletons from datasets
