@@ -93,8 +93,10 @@ process_salmonella_data <- function(saints_seq_only) {
   singletons <- list(
     subspecies1_O_antigen = get_singletons(subspecies_data$subspecies1, "serovar"),
     subspecies1_cgMLST = get_singletons(subspecies_data$subspecies1, "serovar_cgmlst"),
+    subspecies1_serogroup = get_singletons(subspecies_data$subspecies1, "serogroup"),
     subspecies2_O_antigen = get_singletons(subspecies_data$subspecies2, "serovar"),
-    subspecies2_cgMLST = get_singletons(subspecies_data$subspecies2, "serovar_cgmlst")
+    subspecies2_cgMLST = get_singletons(subspecies_data$subspecies2, "serovar_cgmlst"),
+    subspecies2_serogroup = get_singletons(subspecies_data$subspecies2, "serogroup")
   )
   
   # Remove singletons from datasets
