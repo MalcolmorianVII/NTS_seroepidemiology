@@ -2,7 +2,7 @@
 source("scripts/libraries.R")
 
 # Load configuration
-# source("R/config.R")
+source("scripts/config.R")
 # Load data
 source("scripts/data_loading.R")
 # # Source utility functions
