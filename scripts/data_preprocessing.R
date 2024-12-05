@@ -10,7 +10,6 @@ preprocess_saints_data <- function(data) {
     filter(
       !(sample == "CQJ142" | is.na(serogroup))
     )
-  
   return(data)
 }
 
@@ -70,7 +69,6 @@ reorder_columns_by_frequency <- function(data, columns = c("serovar", "serogroup
   for (col in columns) {
     data <- reorder_column(data, col)
   }
-  
   return(data)
 }
 
@@ -145,19 +143,4 @@ write_singletons_to_excel <- function(singletons) {
   
   # Optional: Log file writing
   message(paste("Singletons written to:", output_path))
-}
-
-# Example usage in main script
-main <- function() {
-  # Load data
-  saints_seq_only <- load_saints_datasets()$saints_seq_only
-  
-  # Process data
-  processed_data <- process_salmonella_data(saints_seq_only)
-  
-  # Access processed components
-  subspecies1 <- processed_data$reordered_data$subspecies1
-  subspecies2 <- processed_data$reordered_data$subspecies2
-  
-  # Continue with further analysis...
 }
