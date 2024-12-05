@@ -1,14 +1,15 @@
 # Load required libraries
-source("R/libraries.R")
+source("scripts/libraries.R")
 
 # Load configuration
-source("R/config.R")
-
-# Source utility functions
-source("R/utils.R")
-source("R/data_preprocessing.R")
-source("R/statistical_analysis.R")
-source("R/visualization.R")
+# source("R/config.R")
+# Load data
+source("scripts/data_loading.R")
+# # Source utility functions
+# source("R/utils.R")
+source("scripts/data_preprocessing.R")
+# source("R/statistical_analysis.R")
+# source("R/visualization.R")
 
 # Main analysis pipeline
 main <- function() {
@@ -21,7 +22,13 @@ main <- function() {
   
   # Preprocess data
   processed_data <- preprocess_salmonella_data(saints_seq_only)
+
+  # Access processed components
+  subspecies1 <- processed_data$reordered_data$subspecies1
+  subspecies2 <- processed_data$reordered_data$subspecies2
   
+  # Visualize serovar,serogroup distributions in subspecies 1,2
+
   # Perform analyses
   perform_statistical_analyses(processed_data)
   
