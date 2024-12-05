@@ -31,11 +31,15 @@ split_by_subspecies <- function(data) {
 #' @param classification Column to check for singletons
 #' @return Dataframe of singleton entries
 get_singletons <- function(data, classification = "serovar") {
-  data %>%
+  singletons <- data %>%
     group_by(!!sym(classification)) %>%
     filter(n() == 1) %>%
     ungroup()
+  
+  singletons$singletype <- classification
+  return(singletons)
 }
+
 
 #' Remove Singletons from Dataset
 #'
@@ -47,6 +51,7 @@ remove_singletons <- function(data, classification = "serovar") {
     group_by(!!sym(classification)) %>%
     filter(n() > 1) %>%
     ungroup()
+  
 }
 
 #' Reorder Categorical Columns by Frequency
