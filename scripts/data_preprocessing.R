@@ -18,6 +18,7 @@ preprocess_saints_data <- function(data) {
 #' @param data Preprocessed dataframe
 #' @return List containing subspecies I and II dataframes
 split_by_subspecies <- function(data) {
+  data$subspecies <- ifelse(grepl("II", data$serovar_cgmlst), "II", "I")
   list(
     subspecies1 = data %>% filter(subspecies == "I"),
     subspecies2 = data %>% filter(subspecies == "II")
