@@ -21,7 +21,7 @@ main <- function() {
   wilson_data <- datasets$wilson_data
   
   # Preprocess data
-  processed_data <- preprocess_salmonella_data(saints_seq_only)
+  processed_data <- process_salmonella_data(saints_seq_only)
 
   # Access processed components
   subspecies1 <- processed_data$reordered_data$subspecies1
