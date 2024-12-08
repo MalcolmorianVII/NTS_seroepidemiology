@@ -9,7 +9,7 @@ source("scripts/data_loading.R")
 # source("R/utils.R")
 source("scripts/data_preprocessing.R")
 # source("R/statistical_analysis.R")
-# source("R/visualization.R")
+source("scripts/visualization.R")
 
 # Main analysis pipeline
 main <- function() {
@@ -28,7 +28,7 @@ main <- function() {
   subspecies2 <- processed_data$reordered_data$subspecies2
   
   # Visualize serovar,serogroup distributions in subspecies 1,2
-
+  create_serovar_distribution_plot(subspecies1, "serovar")
   # Perform analyses
   perform_statistical_analyses(processed_data)
   
