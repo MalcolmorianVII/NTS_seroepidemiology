@@ -1,9 +1,3 @@
-library(ggplot2)
-library(dplyr)
-library(ggpubr)
-library(patchwork)
-library(scales)
-
 # Visualization Configuration
 viz_config <- list(
   theme_base = theme_minimal(),
