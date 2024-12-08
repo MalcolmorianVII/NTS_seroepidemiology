@@ -44,5 +44,3 @@ This pipeline integrates genomic and serological data to extract meaningful insi
   - Other graphical summaries of genomic and serological findings.
 
 ---
-
-This workflow ensures a comprehensive approach to understanding the interplay between genomic and serological data, providing valuable insights into NTS epidemiology in Africa.
