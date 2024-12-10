@@ -1,6 +1,6 @@
 ### The Seroepidemiology of Non-Typhoidal Salmonella (NTS)
 
-This project aims to integrate genomic analyses with serological data to investigate the epidemiology of non-typhoidal Salmonella (NTS) in Africa. By combining findings from whole-genome sequencing (WGS) with ELISA data and visualizations, the project provides insights into the seroepidemiology of NTS. The workflow involves the following steps:
+This project integrates genomic analyses with serological data to investigate the epidemiology of non-typhoidal Salmonella (NTS) in Africa. By combining findings from whole-genome sequencing (WGS) with ELISA data and visualizations, the project provides insights into the seroepidemiology of NTS. The workflow involves the following steps:
 
 ---
 
